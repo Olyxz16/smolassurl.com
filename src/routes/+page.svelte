@@ -29,10 +29,11 @@
 </script>
 
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>    
+<h1>Welcome to Smolassurl</h1>
+<p>Visit <a href="/">this</a> to read.</p>    
 
 <form on:submit|preventDefault={onSubmit}>
+    <label> url: </label>
     <input type="text" bind:value={url}/>
     <button> go </button>
 </form>
