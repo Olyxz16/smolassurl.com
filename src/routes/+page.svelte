@@ -7,12 +7,10 @@
     let valid = true;
 
     async function onSubmit() {
-        console.log(url);
-        if(!isValid(url)) {
-            valid = false;
+        valid = isValid(url);
+        if(!valid) {
             return;
         }
-        valid = true;
         const body = JSON.stringify(url);
         const res = await fetch("/", 
         { 
