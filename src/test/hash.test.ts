@@ -4,5 +4,5 @@ import { test, expect } from "vitest";
 const values: string[] = ["https://www.twitter.com"];
 
 test("hash", async () => {
-    values.forEach(element => expect(dehash(hash(element))).to.equal(element));
+    values.forEach(async element => expect(await dehash(await hash(element))).to.equal(element));
 });
