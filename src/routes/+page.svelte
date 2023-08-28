@@ -1,6 +1,11 @@
 <script> 
 
+    import axios from 'axios';
     import { isValid } from '$lib/urlvalidation';
+    import { onMount } from 'svelte';
+   
+    let origin = ``;
+    onMount(() => origin = window.location.origin);
 
     let url = "";
     let result = "";
@@ -11,17 +16,8 @@
         if(!valid) {
             return;
         }
-        const body = JSON.stringify(url);
-        const res = await fetch("/", 
-        { 
-            method: 'post',
-            body: body,
-            headers: {
-                'content-type': 'application/json'
-            }
-        })
-        .then(res => res.blob());
-        result = await res.text();
+        axios.post('/', {data: url})
+        .then(res => result = res.data);
     }
 
 </script>
@@ -37,16 +33,16 @@
         <button> go </button>
     </form>
 
-    {#if result != "" && valid}  
-        <p> result: {result} </p>
+    {#if result != "" && valid}
+        <p> result: {origin}/{result} </p>
     {:else if !valid}
         <p> URL invalide </p>
     {/if}
 
 </div>
 
-<footer style="bottom: 0%; position: absolute; left:0; width: 100%; margin: 0; overflow: hidden;">
-    <div style="text-align: center;">  </div>
+<footer style="bottom: 1%; position: absolute; left:0; width: 100%; margin: 0; overflow: hidden;">
+    <div style="text-align: center;"> Made with 🍑 by <a href="https://github.com/Olyxz16"> Cédric Sazos </a> </div>
 </footer>
 
 
