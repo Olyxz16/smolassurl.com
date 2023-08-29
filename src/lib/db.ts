@@ -10,8 +10,15 @@ export async function GetKeyFromURL(url: string) {
   if(req !== undefined) {
     return req["id"];
   }
-  let id = Math.floor(Math.random() * (max - min) + min);
-  await sql`INSERT INTO urls VALUES (${id}, ${url})`;
+  const ids = (await sql`SELECT id FROM urls`).rows;
+  let id : number;
+  do {
+    id = Math.floor(Math.random() * (max - min) + min);
+  }
+  while(ids.some((el) => {
+    el["id"] === id;
+  }));
+  sql`INSERT INTO urls VALUES (${id}, ${url})`;
   return id;
 }
 
